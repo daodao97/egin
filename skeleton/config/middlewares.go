@@ -1,9 +1,8 @@
 package config
 
 import (
+	"github.com/daodao97/egin/egin/middleware"
 	"github.com/gin-gonic/gin"
-
-	"github.com/daodao97/egin/middleware"
 )
 
 type MiddlewaresSlice []func() gin.HandlerFunc

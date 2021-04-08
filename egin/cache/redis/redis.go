@@ -8,8 +8,8 @@ import (
 	"github.com/davecgh/go-spew/spew"
 	goredis "github.com/go-redis/redis/v8"
 
-	"github.com/daodao97/egin/utils/config"
-	"github.com/daodao97/egin/utils/logger"
+	"github.com/daodao97/egin/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/logger"
 )
 
 var redisLogger = logger.NewLogger("redis")

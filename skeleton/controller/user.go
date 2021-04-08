@@ -7,10 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 
-	"github.com/daodao97/egin/cache"
-	"github.com/daodao97/egin/consts"
-	"github.com/daodao97/egin/db"
-	"github.com/daodao97/egin/utils"
+	"github.com/daodao97/egin/egin/cache/redis"
+	"github.com/daodao97/egin/egin/consts"
+	"github.com/daodao97/egin/egin/db"
+	"github.com/daodao97/egin/egin/utils"
 
 	"skeleton/model"
 )
@@ -63,7 +63,7 @@ func (u User) Get(c *gin.Context, params ParamsValidate) (interface{}, consts.Er
 		OrderBy: "id desc",
 	}, &result)
 
-	redis := cache.Redis{Connection: "default"}
+	redis := redis.NewDefault()
 	setV, _ := json.Marshal([]int{1, 2, 4})
 	err = redis.Set("egin:test", setV, 0)
 	_cache, err := redis.Get("egin:test")

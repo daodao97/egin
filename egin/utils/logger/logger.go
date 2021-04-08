@@ -8,7 +8,7 @@ import (
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/sirupsen/logrus"
 
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 func NewLogger(channel string) Logger {

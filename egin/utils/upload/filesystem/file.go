@@ -3,9 +3,9 @@ package filesystem
 import (
 	"errors"
 
-	"github.com/daodao97/egin/utils/config"
-	"github.com/daodao97/egin/utils/upload/aliyunoss"
-	"github.com/daodao97/egin/utils/upload/base"
+	"github.com/daodao97/egin/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/upload/aliyunoss"
+	"github.com/daodao97/egin/egin/utils/upload/base"
 )
 
 func New(name string) (base.Interface, error) {

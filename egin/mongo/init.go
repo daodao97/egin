@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 type Database struct {

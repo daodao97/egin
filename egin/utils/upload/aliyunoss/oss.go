@@ -4,7 +4,7 @@ import (
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 	"github.com/davecgh/go-spew/spew"
 
-	"github.com/daodao97/egin/utils/upload/base"
+	"github.com/daodao97/egin/egin/utils/upload/base"
 )
 
 type Conf struct {

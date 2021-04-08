@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/daodao97/egin/utils/goroutine"
+	"github.com/daodao97/egin/egin/utils/goroutine"
 )
 
 // 基于滑动时间窗口的限流器

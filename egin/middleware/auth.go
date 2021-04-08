@@ -7,9 +7,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/daodao97/egin/lib"
-	"github.com/daodao97/egin/utils"
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/lib"
+	"github.com/daodao97/egin/egin/utils"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 // cors

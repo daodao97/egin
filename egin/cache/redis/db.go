@@ -6,7 +6,7 @@ import (
 
 	goredis "github.com/go-redis/redis/v8"
 
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 var pool sync.Map

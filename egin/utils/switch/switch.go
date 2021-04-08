@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/daodao97/egin/utils/consul"
+	"github.com/daodao97/egin/egin/utils/consul"
 )
 
 var (

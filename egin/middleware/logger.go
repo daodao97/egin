@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/daodao97/egin/lib"
-	"github.com/daodao97/egin/utils/logger"
+	"github.com/daodao97/egin/egin/lib"
+	"github.com/daodao97/egin/egin/utils/logger"
 )
 
 // 日志记录到文件

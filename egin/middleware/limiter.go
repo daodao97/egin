@@ -9,9 +9,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/daodao97/egin/cache/redis"
-	"github.com/daodao97/egin/utils/config"
-	"github.com/daodao97/egin/utils/limiter"
+	"github.com/daodao97/egin/egin/cache/redis"
+	"github.com/daodao97/egin/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/limiter"
 )
 
 // 单个Api在一秒内的请求次数限制, 不区分用户

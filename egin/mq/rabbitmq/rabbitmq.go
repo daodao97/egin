@@ -6,8 +6,8 @@ import (
 
 	"github.com/streadway/amqp"
 
-	"github.com/daodao97/egin/utils/config"
-	"github.com/daodao97/egin/utils/logger"
+	"github.com/daodao97/egin/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/logger"
 )
 
 var mqLogger = logger.NewLogger("mq")

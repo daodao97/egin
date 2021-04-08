@@ -1,7 +1,7 @@
 package consts
 
 import (
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 type ErrCode int

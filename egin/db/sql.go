@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/daodao97/egin/lib"
+	"github.com/daodao97/egin/egin/lib"
 )
 
 // sql 片段的构造

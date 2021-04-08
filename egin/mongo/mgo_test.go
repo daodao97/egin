@@ -10,7 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 // D：一个BSON文档。这种类型应该在顺序重要的情况下使用，比如MongoDB命令。

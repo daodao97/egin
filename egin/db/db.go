@@ -9,9 +9,9 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/daodao97/egin/utils/config"
-	"github.com/daodao97/egin/utils/goroutine"
-	"github.com/daodao97/egin/utils/logger"
+	"github.com/daodao97/egin/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/goroutine"
+	"github.com/daodao97/egin/egin/utils/logger"
 )
 
 var pool sync.Map

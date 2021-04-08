@@ -6,10 +6,10 @@ package routes
 import (
 	"strings"
 
-	"github.com/daodao97/egin"
-	"github.com/daodao97/egin/consts"
-	"github.com/daodao97/egin/middleware"
-	"github.com/daodao97/egin/utils"
+	"github.com/daodao97/egin/egin"
+	"github.com/daodao97/egin/egin/consts"
+	"github.com/daodao97/egin/egin/middleware"
+	"github.com/daodao97/egin/egin/utils"
 	"github.com/gin-gonic/gin"
 
 	"skeleton/controller"

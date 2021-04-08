@@ -9,7 +9,7 @@ import (
 	goredis "github.com/go-redis/redis/v8"
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/daodao97/egin/utils/logger"
+	"github.com/daodao97/egin/egin/utils/logger"
 )
 
 var namespace = "service"

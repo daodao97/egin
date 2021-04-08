@@ -9,9 +9,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/daodao97/egin/consts"
-	"github.com/daodao97/egin/middleware"
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/consts"
+	"github.com/daodao97/egin/egin/middleware"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 type Bootstrap struct {

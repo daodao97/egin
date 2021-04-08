@@ -6,7 +6,7 @@ import (
 	"github.com/golang/glog"
 	"gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 // 目前仅支持最简单的内网模式

@@ -3,7 +3,7 @@ package db
 import (
 	"database/sql"
 
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 type ModelConf struct {

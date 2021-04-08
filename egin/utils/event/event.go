@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/daodao97/egin/utils/goroutine"
+	"github.com/daodao97/egin/egin/utils/goroutine"
 )
 
 type EventData struct {

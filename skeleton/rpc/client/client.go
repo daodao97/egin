@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc"
 
-	pb "github.com/daodao97/egin/rpc/pb"
+	pb "github.com/daodao97/egin/egin/rpc/pb"
 )
 
 func main() {

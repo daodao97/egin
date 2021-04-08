@@ -12,8 +12,8 @@ import (
 
 	"github.com/joho/godotenv"
 
-	"github.com/daodao97/egin/lib"
-	"github.com/daodao97/egin/utils/consul"
+	"github.com/daodao97/egin/egin/lib"
+	"github.com/daodao97/egin/egin/utils/consul"
 )
 
 type ConfigStruct struct {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/daodao97/egin/mq/rabbitmq"
+	"github.com/daodao97/egin/egin/mq/rabbitmq"
 )
 
 var mode = flag.String("mode", "", "运行模式")

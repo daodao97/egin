@@ -12,7 +12,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	zh_translations "github.com/go-playground/validator/v10/translations/zh"
 
-	"github.com/daodao97/egin/lib"
+	"github.com/daodao97/egin/egin/lib"
 )
 
 var Validate *validator.Validate

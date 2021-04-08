@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-playground/assert/v2"
 
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 func init() {

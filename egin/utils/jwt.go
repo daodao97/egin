@@ -5,7 +5,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 
-	"github.com/daodao97/egin/utils/config"
+	"github.com/daodao97/egin/egin/utils/config"
 )
 
 var jwtSecret = []byte(config.Config.Jwt.Secret)

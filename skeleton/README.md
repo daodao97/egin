@@ -167,8 +167,8 @@ air
 ### 如何参与
 
 ```bash
-go get github.com/daodao97/egin
-cd $GOPATH/src/github.com/daodao97/egin
+go get github.com/daodao97/egin/egin
+cd $GOPATH/src/github.com/daodao97/egin/egin
 goland . #编辑器打开  vscode .
 air #开发模式启动
 ```

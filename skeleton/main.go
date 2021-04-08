@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/daodao97/egin"
+	"github.com/daodao97/egin/egin"
 
 	"skeleton/config"
 )
