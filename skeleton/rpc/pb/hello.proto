@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package hello;
+
+// 定义服务
+service Hello {
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// 请求体的结构体
+message HelloRequest {
+  string name = 1;
+}
+
+// 响应的结构体
+message HelloReply {
+  string message = 1;
+  int64 code = 2;
+}
+
+// 定义服务
+service Bye {
+  rpc SayHello (ByeRequest) returns (ByeReply) {}
+}
+
+// 请求体的结构体
+message ByeRequest {
+  string name = 1;
+}
+
+// 响应的结构体
+message ByeReply {
+  string message = 1;
+  int64 code = 2;
+}
