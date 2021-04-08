@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 
-	pb "github.com/daodao97/egin/egin/rpc/pb"
+	pb "skeleton/rpc/pb"
 )
 
 // server 用来实现 hello.HelloServer

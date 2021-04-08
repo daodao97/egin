@@ -26,21 +26,17 @@ type UserEntity struct {
 	UpdateAt      string `json:"update_at"`
 }
 
-type UserModel struct {
-	db.BaseModel
-}
-
-var User UserModel
+var User db.Model
 
 func init() {
-	User = *NewUserModel()
+	User = NewUserModel()
 }
 
-func NewUserModel() *UserModel {
-	return &UserModel{
-		BaseModel: db.BaseModel{
-			Connection: "default",
-			Table:      "user",
-		},
+func NewUserModel() db.Model {
+	conf:= db.ModelConf{
+		Connection: "default",
+		Table:      "user",
 	}
+	model := db.NewModel(conf)
+	return model
 }

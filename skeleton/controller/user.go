@@ -54,7 +54,7 @@ func (u User) Get(c *gin.Context, params ParamsValidate) (interface{}, consts.Er
 
 	var result []model.UserEntity
 	user := model.User
-	err := user.Get(db.Filter{
+	err := user.Select(db.Filter{
 		"id": map[string]int{
 			">": 20,
 		},
@@ -63,10 +63,10 @@ func (u User) Get(c *gin.Context, params ParamsValidate) (interface{}, consts.Er
 		OrderBy: "id desc",
 	}, &result)
 
-	redis := redis.NewDefault()
+	cache := redis.NewDefault()
 	setV, _ := json.Marshal([]int{1, 2, 4})
-	err = redis.Set("egin:test", setV, 0)
-	_cache, err := redis.Get("egin:test")
+	err = cache.Set("egin:test", setV, 0)
+	_cache, err := cache.Get("egin:test")
 
 	return []interface{}{result, params, _cache}, 0, err
 }

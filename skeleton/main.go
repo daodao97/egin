@@ -12,7 +12,7 @@ import (
 func main() {
 	boot := egin.Bootstrap{
 		HttpMiddlewares: config.HttpMiddlewares,
-		RegHandler:      config.RegRouter,
+		RegRoutes:       config.RegRouter,
 	}
 	boot.Start()
 }
