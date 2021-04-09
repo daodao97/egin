@@ -5,6 +5,20 @@
 go get -u github.com/daodao97/egin/egin
 ```
 
+安装骨架包进行开发
+```bash
+cd /workspace
+git clone github.com/daodao97/egin my-app
+cd my-app/skeleton
+goland . #编辑器打开  vscode .
+air #开发模式启动
+```
+
+安装开发辅助工具
+```bash
+go get -u github.com/daodao97/egin/tools
+```
+
 #### 路由自动生成
 
 ### 配置的管理
@@ -20,7 +34,7 @@ go get -u github.com/daodao97/egin/egin
 
 基于单一数据模型的`CRUD`通用控制器方法
 
-- [x] 底层通用方法
+- [ ] 底层通用方法
 
 ### 数据模型的封装
 
@@ -52,7 +66,7 @@ go get -u github.com/daodao97/egin/egin
     - [ ] 用户维度
 - [ ] prometheus打点
     - [x] api打点
-    - [x] db数据打点
+    - [ ] db数据打点
     - [x] redis打点
 
 ### 微服务
