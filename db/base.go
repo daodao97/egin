@@ -2,8 +2,6 @@ package db
 
 import (
 	"database/sql"
-
-	"github.com/daodao97/egin/egin/utils/config"
 )
 
 type ModelConf struct {
@@ -35,7 +33,7 @@ type Model interface {
 	AfterDelete(function func(m Model, lastId int64, affected int64, err error))
 	GetTableName() string
 	GetConnectionName() string
-	GetConf() config.Database
+	GetConf() Database
 	GetLastSql() string
 }
 

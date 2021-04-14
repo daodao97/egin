@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"runtime"
 	"strings"
-
-	"github.com/davecgh/go-spew/spew"
 )
 
 func getModel() Model {
@@ -30,7 +28,6 @@ func getLastVersionData(tableName string, dbName string) (preData map[string]int
 }
 
 func getDiffFields(preData map[string]interface{}, newData map[string]interface{}) (diffKey []string) {
-	spew.Dump(preData, newData)
 	for k, v := range newData {
 		pre, ok := preData[k]
 		if !ok {
@@ -60,6 +57,5 @@ func DataVersion(m Model, lastId int64, record Record, err error) {
 		"modify_fields": strings.Join(getDiffFields(preData, record), ","),
 	})
 
-	fmt.Println(111111111)
 	fmt.Println(runtime.Stack([]byte(""), true))
 }

@@ -8,12 +8,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/daodao97/egin/egin/utils/config"
-	"github.com/daodao97/egin/egin/utils/logger"
 )
-
-var _logger = logger.NewLogger("mysql")
 
 // 从池子中捞出一个db对象, 注意, 这里并非 mysql 连接池
 func getDBInPool(key string) (*sql.DB, bool) {
@@ -34,9 +29,9 @@ func NewModel(conf ModelConf) Model {
 	if conf.PrimaryKey == "" {
 		conf.PrimaryKey = "id"
 	}
-	dbConf, ok := config.Config.Database[conf.Connection]
+	currentDb, ok := dbConf[conf.Connection]
 	if !ok {
-		_logger.Error(fmt.Sprintf("database %s not found", conf.Connection))
+		logger.Error(fmt.Sprintf("database %s not found", conf.Connection))
 	}
 
 	db, ok := getDBInPool(conf.Connection)
@@ -44,7 +39,7 @@ func NewModel(conf ModelConf) Model {
 		panic("not found db conn")
 	}
 	return &baseModel{
-		conf:       dbConf,
+		conf:       currentDb,
 		Driver:     conf.Driver,
 		Table:      conf.Table,
 		Connection: conf.Connection,
@@ -58,7 +53,7 @@ func NewModel(conf ModelConf) Model {
 // TODO 主从库的支持
 // Model 的基础封装
 type baseModel struct {
-	conf         config.Database
+	conf         Database
 	Driver       string
 	Table        string
 	PrimaryKey   string
@@ -323,7 +318,7 @@ func (m *baseModel) GetConnectionName() string {
 	return m.Connection
 }
 
-func (m *baseModel) GetConf() config.Database {
+func (m *baseModel) GetConf() Database {
 	return m.conf
 }
 
@@ -336,7 +331,7 @@ func timeCost() func(m *baseModel) {
 	start := time.Now()
 	return func(m *baseModel) {
 		tc := time.Since(start)
-		_logger.Info(
+		logger.Info(
 			fmt.Sprintf("use time %v", tc),
 			map[string]interface{}{
 				"table":      m.Table,

@@ -5,8 +5,6 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-
-	"github.com/daodao97/egin/egin/lib"
 )
 
 // sql 片段的构造
@@ -94,7 +92,7 @@ func filterToQuery(filter Filter) (string, []interface{}) {
 			var _scope []string
 			var _logic = LogicStrAnd
 			for op, val := range v.(map[string]string) {
-				_, found := lib.Find([]string{">", ">=", "<", "<=", "=", "<>", "!=", "like"}, op)
+				_, found := find([]string{">", ">=", "<", "<=", "=", "<>", "!=", "like"}, op)
 				if found {
 					_scope = append(_scope, fmt.Sprintf("`%s` %s ?", k, op))
 				}
@@ -111,7 +109,7 @@ func filterToQuery(filter Filter) (string, []interface{}) {
 			var _scope []string
 			var _logic = LogicIntAnd
 			for op, val := range v.(map[string]int) {
-				_, found := lib.Find([]string{">", ">=", "<", "<=", "=", "<>", "!=", "like"}, op)
+				_, found := find([]string{">", ">=", "<", "<=", "=", "<>", "!=", "like"}, op)
 				if found {
 					_scope = append(_scope, fmt.Sprintf("`%s` %s ?", k, op))
 				}
@@ -171,4 +169,13 @@ func attrToSelectQuery(attr Attr) string {
 		return "*"
 	}
 	return fmt.Sprintf("`%s`", strings.Join(attr.Select, "`,`"))
+}
+
+func find(slice []string, val string) (int, bool) {
+	for i, item := range slice {
+		if item == val {
+			return i, true
+		}
+	}
+	return -1, false
 }

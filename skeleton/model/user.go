@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/daodao97/egin/egin/db"
+	"github.com/daodao97/egin/db"
 )
 
 // 后台用户
@@ -33,7 +33,7 @@ func init() {
 }
 
 func NewUserModel() db.Model {
-	conf:= db.ModelConf{
+	conf := db.ModelConf{
 		Connection: "default",
 		Table:      "user",
 	}

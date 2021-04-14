@@ -8,26 +8,51 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
-
-	"github.com/daodao97/egin/egin/utils/config"
-	"github.com/daodao97/egin/egin/utils/goroutine"
-	"github.com/daodao97/egin/egin/utils/logger"
 )
 
-var pool sync.Map
-
-func init() {
-	dbConf := config.Config.Database
-	for key, conf := range dbConf {
-		db := makeDb(conf)
-		pool.Store(key, db)
+type Database struct {
+	Host     string
+	Port     int
+	User     string
+	Passwd   string
+	Database string
+	Driver   string
+	Options  map[string]string
+	Pool     struct {
+		MaxOpenConns int
+		MaxIdleConns int
 	}
-	logger.NewLogger("mysql").Info("db init")
-	goroutine.Go(clearStmt)
+}
+
+type Databases map[string]Database
+
+type Logger interface {
+	Info(message interface{}, content ...interface{})
+	Error(message interface{}, content ...interface{})
+}
+
+var (
+	pool   sync.Map
+	dbConf Databases
+	logger Logger
+	once   sync.Once
+)
+
+func Init(_dbConf Databases, _logger Logger) {
+	once.Do(func() {
+		dbConf = _dbConf
+		for key, conf := range dbConf {
+			db := makeDb(conf)
+			pool.Store(key, db)
+		}
+		logger = _logger
+		logger.Info("db init")
+		go clearStmt()
+	})
 }
 
 // 生成 原生 DB 对象
-func makeDb(conf config.Database) *sql.DB {
+func makeDb(conf Database) *sql.DB {
 	server := fmt.Sprintf("%s:%d", conf.Host, conf.Port)
 	dsn := fmt.Sprintf("%s:%s@(%s)/%s?charset=utf8&parseTime=True&loc=Local", conf.User, conf.Passwd, server, conf.Database)
 	driver := conf.Driver
@@ -66,7 +91,7 @@ func exec(db *sql.DB, _sql string, args ...interface{}) (int64, int64, error) {
 
 	tx, err := db.Begin()
 	if err != nil {
-		_logger.Error(err)
+		logger.Error(err)
 		return 0, 0, err
 	}
 	var flag bool
@@ -77,13 +102,13 @@ func exec(db *sql.DB, _sql string, args ...interface{}) (int64, int64, error) {
 		}
 		err := tx.Rollback()
 		if err != nil {
-			_logger.Error(fmt.Sprintf("db.exec.rollback fail: %s", err), map[string]interface{}{
+			logger.Error(fmt.Sprintf("db.exec.rollback fail: %s", err), map[string]interface{}{
 				"sql":  _sql,
 				"args": args,
 				"msg":  errMsg,
 			})
 		} else {
-			_logger.Info("db.exec.rollback", map[string]interface{}{
+			logger.Info("db.exec.rollback", map[string]interface{}{
 				"sql":  _sql,
 				"args": args,
 				"msg":  errMsg,
@@ -93,7 +118,7 @@ func exec(db *sql.DB, _sql string, args ...interface{}) (int64, int64, error) {
 
 	stmt, err := tx.Prepare(_sql)
 	if err != nil {
-		_logger.Error("db.exec.prepare fail", map[string]interface{}{
+		logger.Error("db.exec.prepare fail", map[string]interface{}{
 			"sql":  _sql,
 			"args": args,
 			"msg":  err,
@@ -104,7 +129,7 @@ func exec(db *sql.DB, _sql string, args ...interface{}) (int64, int64, error) {
 
 	res, err := stmt.Exec(args...)
 	if err != nil {
-		_logger.Error("db.exec.exec fail", map[string]interface{}{
+		logger.Error("db.exec.exec fail", map[string]interface{}{
 			"sql":  _sql,
 			"args": args,
 			"msg":  err,
@@ -114,7 +139,7 @@ func exec(db *sql.DB, _sql string, args ...interface{}) (int64, int64, error) {
 
 	err = tx.Commit()
 	if err != nil {
-		_logger.Error("db.exec.commit fail", map[string]interface{}{
+		logger.Error("db.exec.commit fail", map[string]interface{}{
 			"sql":  _sql,
 			"args": args,
 			"msg":  err,
@@ -125,7 +150,7 @@ func exec(db *sql.DB, _sql string, args ...interface{}) (int64, int64, error) {
 
 	lastId, err := res.LastInsertId()
 	if err != nil {
-		_logger.Error("db.exec.lastId fail", map[string]interface{}{
+		logger.Error("db.exec.lastId fail", map[string]interface{}{
 			"sql":  _sql,
 			"args": args,
 			"msg":  err,
@@ -135,7 +160,7 @@ func exec(db *sql.DB, _sql string, args ...interface{}) (int64, int64, error) {
 
 	affected, err := res.RowsAffected()
 	if err != nil {
-		_logger.Error("db.exec.affected fail", map[string]interface{}{
+		logger.Error("db.exec.affected fail", map[string]interface{}{
 			"sql":  _sql,
 			"args": args,
 			"msg":  err,
@@ -149,7 +174,7 @@ func exec(db *sql.DB, _sql string, args ...interface{}) (int64, int64, error) {
 func Query(db *sql.DB, _sql string, args ...interface{}) (result []map[string]interface{}, err error) {
 	stmt, err := makeStmt(db, _sql)
 	if err != nil {
-		_logger.Error("db.query.prepare fail", map[string]interface{}{
+		logger.Error("db.query.prepare fail", map[string]interface{}{
 			"sql":  _sql,
 			"args": args,
 			"msg":  err,
@@ -159,7 +184,7 @@ func Query(db *sql.DB, _sql string, args ...interface{}) (result []map[string]in
 
 	rows, err := stmt.Query(args...)
 	if err != nil {
-		_logger.Error("db.query.query fail", map[string]interface{}{
+		logger.Error("db.query.query fail", map[string]interface{}{
 			"sql":  _sql,
 			"args": args,
 			"msg":  err,
@@ -182,7 +207,6 @@ func rows2SliceMap(rows *sql.Rows) (list []map[string]interface{}, err error) {
 		var dest []interface{}
 
 		columnTypes, err := rows.ColumnTypes()
-		// spew.Dump(columnTypes)
 		if err != nil {
 			continue
 		}
@@ -201,6 +225,9 @@ func rows2SliceMap(rows *sql.Rows) (list []map[string]interface{}, err error) {
 		err = rows.Scan(dest...)
 		if err != nil {
 			fmt.Println("scan error", err)
+			continue
+		}
+		if dest == nil {
 			continue
 		}
 		// 每一行

@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/daodao97/egin/db"
+	"github.com/daodao97/egin/egin/utils/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
@@ -22,13 +24,13 @@ type Bootstrap struct {
 
 func (boot *Bootstrap) Start() {
 	gin.SetMode(config.Config.Mode)
-	// gin.DefaultWriter = ginLogger()
 	boot.engine = gin.Default()
 	boot.regMiddlewares()
 	boot.RegRoutes(boot.engine)
 	boot.regRoutes()
 	boot.engine.NoRoute(middleware.HandleNotFound)
 	err := boot.engine.Run(config.Config.Address)
+	db.Init(config.Config.Database, logger.NewLogger("mysql"))
 	if err != nil {
 		return
 	}
