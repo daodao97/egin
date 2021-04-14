@@ -1,4 +1,4 @@
-module db
+module github.com/daodao97/egin/egin
 
 go 1.14
 
